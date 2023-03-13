@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+# JDBC Configuration
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_productsdb
+    username: ventalis-*******
+    password: ************
+# JPA Configuration
+
+  jpa:
+    database-platform: org.hibernate.dialect
+    database: mysql
+    hibernate:
+      ddl-auto: create-drop # other options : none, validate, update, create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB106Dialect
+    show-sql: true # to see sql commands
