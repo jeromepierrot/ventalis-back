@@ -11,7 +11,6 @@ import lombok.*;
 @Entity
 @Table(name = "products")
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,7 +23,7 @@ public class Product {
 
     @Builder.Default
     private String description = "";
-    private Float unitPriceHT;
+    private Float unitPriceHt;
     @Builder.Default
     private Integer minOrderQuantity = 1000;
     @Builder.Default
@@ -38,9 +37,9 @@ public class Product {
         return "{" +
                 "id=" + id +
                 ", category=" + category +
-                ", label=" + label + '\'' +
-                ", unitPriceHT=" + unitPriceHT + '\'' +
-                ", minOrderQuantity=" + unitPriceHT +
+                ", label=" + label +
+                ", unitPriceHT=" + unitPriceHt +
+                ", minOrderQuantity=" + unitPriceHt +
                 '}';
     }
 }

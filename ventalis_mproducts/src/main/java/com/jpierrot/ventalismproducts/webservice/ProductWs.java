@@ -1,10 +1,11 @@
 package com.jpierrot.ventalismproducts.webservice;
 
 import com.jpierrot.ventalismproducts.api.ApiRouter;
+import com.jpierrot.ventalismproducts.controllers.CategoryService;
 import com.jpierrot.ventalismproducts.controllers.ProductService;
 import com.jpierrot.ventalismproducts.pojo.Product;
-import com.jpierrot.ventalismproducts.webservice.exceptions.CategoryNotFoundException;
 import com.jpierrot.ventalismproducts.webservice.exceptions.ProductNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +20,20 @@ public class ProductWs {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
 
-    @PostMapping
+    @PostMapping("/add")
     public void addProduct(@RequestBody Product product) { productService.addProduct(product); }
+
+    // TODO : not fully implemented yet
+/*    @PostMapping("/{categoryName}/add")
+    public void addProductWithCategory(@RequestBody Product product, @RequestParam String categoryName) {
+        productService.addProductWithCategory(
+                product,
+                (Category c) -> categoryService.getCategoryByName(categoryName);
+        );
+    }*/
 
     @GetMapping
     public List<Product> getAllProducts() throws ProductNotFoundException {
@@ -30,7 +42,6 @@ public class ProductWs {
         return products;
     }
 
-    // TODO/FIX : not working, to be fixed
     @GetMapping("/{id}")
     public Optional<Product> getProductById (@PathVariable Long id) throws ProductNotFoundException {
         Optional<Product> product = productService.getProductById(id);
@@ -39,14 +50,13 @@ public class ProductWs {
         return product;
     }
 
-    // TODO/FIX : not working, to be fixed
-    @PutMapping("/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public void updateProduct (@RequestBody Product product, @PathVariable Long id) {
         productService.updateProduct(product, id);
     }
 
     // TODO : to be tested
-    @DeleteMapping("/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public void deleteProduct(@PathVariable Long id) {
 
         productService.deleteProduct(id);

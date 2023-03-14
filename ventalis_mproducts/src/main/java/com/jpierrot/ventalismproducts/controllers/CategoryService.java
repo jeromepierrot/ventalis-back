@@ -12,6 +12,9 @@ public interface CategoryService {
 
     Optional<Category> getCategoryById(Long id);
 
+    // TODO : not fully implemented yet
+//    Optional<Category> getCategoryByName(String name);
+
     void updateCategory(Category category, Long id);
 
     void deleteCategory(Long id);

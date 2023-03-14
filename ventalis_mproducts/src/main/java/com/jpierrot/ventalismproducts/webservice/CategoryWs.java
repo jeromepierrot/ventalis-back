@@ -18,7 +18,7 @@ public class CategoryWs {
     @Autowired
     CategoryService categoryService;
 
-    @PostMapping(value = "/add")
+    @PostMapping("/add")
     public void addCategory(@RequestBody Category category) {
         categoryService.addCategory(category);
     }
@@ -30,7 +30,6 @@ public class CategoryWs {
         return categories;
     }
 
-    // TODO/FIX : not working, to be fixed
     @GetMapping("/{id}")
     public Optional<Category> getCategoryById (@PathVariable Long id) throws CategoryNotFoundException {
         Optional<Category> category = categoryService.getCategoryById(id);
@@ -38,11 +37,23 @@ public class CategoryWs {
         return category;
     }
 
-    // TODO/FIX : not working, to be fixed
+/* // TODO : not fully implemented yet
+    @GetMapping("/{name}")
+    public Optional<Category> getCategoryByName (@PathVariable String categoryName) throws CategoryNotFoundException {
+        Optional<Category> category = categoryService.getCategoryByName(categoryName);
+        if(category.isEmpty()) throw new CategoryNotFoundException(ERROR_MESSAGE);
+        return category;
+    }*/
+
     @PutMapping(value = "/update/{id}")
     public void  updateCategory (@RequestBody Category category, @PathVariable Long id){
         categoryService.updateCategory(category, id);
     }
 
-    // TODO : implement delete methods (needed ?)
+    // TODO : to be tested
+    @DeleteMapping("/delete/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+
+        categoryService.deleteCategory(id);
+    }
 }
