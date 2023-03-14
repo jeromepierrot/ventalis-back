@@ -6,8 +6,8 @@ spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_productsdb
-    username: ************
-    password: ************
+    username: ***********
+    password: ***********
 # JPA Configuration
 
   jpa:
