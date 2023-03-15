@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequestMapping(ApiRouter.REST_CATALOG)
 //@CrossOrigin(origins = "http://localhost:4200")
 public class ProductWs {
-    private static final String ERROR_MESSAGE = "Aucun produit trouvé";
+    private static final String NOT_FOUND_ERROR_MESSAGE = "Aucun produit trouvé";
 
     @Autowired
     private ProductService productService;
@@ -38,14 +38,22 @@ public class ProductWs {
     @GetMapping
     public List<Product> getAllProducts() throws ProductNotFoundException {
         List<Product> products = productService.getAllProducts();
-        if(products.isEmpty()) throw new ProductNotFoundException(ERROR_MESSAGE);
+        if(products.isEmpty()) throw new ProductNotFoundException(NOT_FOUND_ERROR_MESSAGE);
         return products;
+    }
+
+    @GetMapping("/search/{name}")
+    public List<Product> getProductByName (@PathVariable String name) throws ProductNotFoundException {
+        List<Product> product = productService.getProductsByName(name);
+        if(product.isEmpty()) throw new ProductNotFoundException(NOT_FOUND_ERROR_MESSAGE);
+
+        return product;
     }
 
     @GetMapping("/{id}")
     public Optional<Product> getProductById (@PathVariable Long id) throws ProductNotFoundException {
         Optional<Product> product = productService.getProductById(id);
-        if(product.isEmpty()) throw new ProductNotFoundException(ERROR_MESSAGE);
+        if(product.isEmpty()) throw new ProductNotFoundException(NOT_FOUND_ERROR_MESSAGE);
 
         return product;
     }

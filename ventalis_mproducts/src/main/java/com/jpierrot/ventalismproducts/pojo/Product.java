@@ -3,6 +3,8 @@ package com.jpierrot.ventalismproducts.pojo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Date;
+
 @Builder
 @Getter
 @Setter
@@ -19,7 +21,7 @@ public class Product {
     @JoinColumn(name = "id_category")
     private Category category;
 
-    private String label;
+    private String name;
 
     @Builder.Default
     private String description = "";
@@ -32,12 +34,21 @@ public class Product {
     @Builder.Default
     private Boolean isVisible = false;
 
+    // TODO : add creationDate and modificationDate into Database schema
+/*
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modifiedDate;
+*/
+
     @Override
     public String toString(){
         return "{" +
                 "id=" + id +
                 ", category=" + category +
-                ", label=" + label +
+                ", label=" + name +
                 ", unitPriceHT=" + unitPriceHt +
                 ", minOrderQuantity=" + unitPriceHt +
                 '}';

@@ -56,6 +56,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    // TODO : not fully implemented yet - test in progress
+    @Override
+    public List<Product> getProductsByName(String name) {
+        return productRepository.findByName(name);
+    }
+
     /**
      * Get a product's infos using its unique id
      * @param id database's unique id for a catalog's product
@@ -77,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
             // Does update only if the original data exists...
             Product productToUpdate = productRepository.getReferenceById(id);
 
-            productToUpdate.setLabel(product.getLabel());
+            productToUpdate.setName(product.getName());
             productToUpdate.setDescription(product.getDescription());
             productToUpdate.setCategory(product.getCategory());
             productToUpdate.setUnitPriceHt(product.getUnitPriceHt());

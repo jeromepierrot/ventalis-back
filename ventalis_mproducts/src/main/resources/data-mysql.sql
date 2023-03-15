@@ -21,7 +21,7 @@ VALUES (
        );
 
 
-INSERT INTO products (`label`, `description`,  `unit_price_ht`, `id_category`)
+INSERT INTO products (`name`, `description`,  `unit_price_ht`, `id_category`) -- TODO: change 'name' by 'label' when test are ok with 'name'
 VALUES (
            'Cartes de visites électroniques',
            'Plus de cartes de visites, un simple geste entre mobile et vous échanger vos données avec vos clients',
