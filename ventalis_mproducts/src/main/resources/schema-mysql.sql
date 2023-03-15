@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS categories
 CREATE TABLE IF NOT EXISTS products
 (
     id     BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL, -- TODO: change name by label after tests with name
+    label VARCHAR(255) NOT NULL,
     description TEXT DEFAULT NULL,
     unit_price_ht FLOAT DEFAULT NULL,
     min_order_quantity INT(11) DEFAULT 1000,

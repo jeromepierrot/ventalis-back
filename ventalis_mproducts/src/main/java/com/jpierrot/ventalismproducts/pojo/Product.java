@@ -21,7 +21,7 @@ public class Product {
     @JoinColumn(name = "id_category")
     private Category category;
 
-    private String name;
+    private String label;
 
     @Builder.Default
     private String description = "";
@@ -48,7 +48,7 @@ public class Product {
         return "{" +
                 "id=" + id +
                 ", category=" + category +
-                ", label=" + name +
+                ", label=" + label +
                 ", unitPriceHT=" + unitPriceHt +
                 ", minOrderQuantity=" + unitPriceHt +
                 '}';

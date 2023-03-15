@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    // TODO : not fully implemented yet : need to replace name by label
-    List<Product> findByName(String name);
+    List<Product> findByLabel(String label);
 
     // TODO : not fully implemented yet
 //    List<Product> findProductsByDescription(String description);

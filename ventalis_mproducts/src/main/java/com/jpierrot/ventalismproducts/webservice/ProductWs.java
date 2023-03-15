@@ -44,7 +44,7 @@ public class ProductWs {
 
     @GetMapping("/search/{name}")
     public List<Product> getProductByName (@PathVariable String name) throws ProductNotFoundException {
-        List<Product> product = productService.getProductsByName(name);
+        List<Product> product = productService.getProductsByLabel(name);
         if(product.isEmpty()) throw new ProductNotFoundException(NOT_FOUND_ERROR_MESSAGE);
 
         return product;

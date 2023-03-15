@@ -14,9 +14,9 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
-    // TODO : not fully implemented yet
-    List<Product> getProductsByName(String name);
+    List<Product> getProductsByLabel(String name);
 
+    // TODO : to refactorize
     Optional<Product> getProductById(Long id);
 
     void updateProductById(Product product, Long id);
