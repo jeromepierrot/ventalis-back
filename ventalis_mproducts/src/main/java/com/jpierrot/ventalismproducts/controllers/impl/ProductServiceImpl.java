@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
      * @param id database's unique id for a catalog's product
      */
     @Override
-    public void updateProduct(Product product, Long id) {
+    public void updateProductById(Product product, Long id) {
         if(productRepository.existsById(id)) {
             // Does update only if the original data exists...
             Product productToUpdate = productRepository.getReferenceById(id);
@@ -97,12 +97,22 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public void updateProduct(Product product, Long id) {
+        updateProductById(product, id);
+    }
+
     /**
      * Delete a product from the database (Careful : permanent operation)
      * @param id database's unique id for a catalog's product
      */
     @Override
-    public void deleteProduct(Long id) {
+    public void deleteProductById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteProduct(Long id) {
+        deleteProductById(id);
     }
 }

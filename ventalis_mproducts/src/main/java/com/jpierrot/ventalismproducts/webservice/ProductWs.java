@@ -52,14 +52,12 @@ public class ProductWs {
 
     @PutMapping(value = "/update/{id}")
     public void updateProduct (@RequestBody Product product, @PathVariable Long id) {
-        productService.updateProduct(product, id);
+        productService.updateProductById(product, id);
     }
 
-    // TODO : to be tested
     @DeleteMapping(value = "/delete/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-
-        productService.deleteProduct(id);
+    public void deleteProduct (@PathVariable Long id) {
+        productService.deleteProductById(id);
     }
 
 }

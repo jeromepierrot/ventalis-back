@@ -42,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
         return this.categoryRepository.findById(id);
     }
 
+
     /**
      * Get a category's infos using its name
      * @param name category's name (should be unique)
@@ -56,13 +57,18 @@ public class CategoryServiceImpl implements CategoryService {
         return Optional.empty();
     }*/
 
+    @Override
+    public void updateCategory(Category category, Long id) {
+        updateCategoryById(category, id);
+    }
+
     /**
      * Update one existing category using its unique id, otherwise do nothing but
      * Note that only 'isVisible' status will be updated
      * @param category the category of product to update
      * @param id database's unique id for the category
      */
-    public void updateCategory(Category category, Long id) {
+    public void updateCategoryById(Category category, Long id) {
         if(categoryRepository.existsById(id)) {
             // Does update only if the original data exists...
             Category categoryToUpdate = categoryRepository.getReferenceById(id);
@@ -81,11 +87,16 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    @Override
+    public void deleteCategory(Long id) {
+        deleteCategoryById(id);
+    }
+
     /**
      * Delete a category from the database (Careful : permanent operation)
      * @param id database's unique id for the category
      */
-    public void deleteCategory(Long id) {
+    public void deleteCategoryById(Long id) {
         categoryRepository.deleteById(id);
     }
 }

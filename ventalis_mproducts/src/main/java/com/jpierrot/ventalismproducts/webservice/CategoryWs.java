@@ -47,13 +47,11 @@ public class CategoryWs {
 
     @PutMapping(value = "/update/{id}")
     public void  updateCategory (@RequestBody Category category, @PathVariable Long id){
-        categoryService.updateCategory(category, id);
+        categoryService.updateCategoryById(category, id);
     }
 
-    // TODO : to be tested
     @DeleteMapping("/delete/{id}")
     public void deleteProduct(@PathVariable Long id) {
-
-        categoryService.deleteCategory(id);
+        categoryService.deleteCategoryById(id);
     }
 }

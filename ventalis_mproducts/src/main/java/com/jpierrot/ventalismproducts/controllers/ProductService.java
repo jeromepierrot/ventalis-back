@@ -16,7 +16,11 @@ public interface ProductService {
 
     Optional<Product> getProductById(Long id);
 
+    void updateProductById(Product product, Long id);
+
     void updateProduct(Product product, Long id);
+
+    void deleteProductById(Long id);
 
     void deleteProduct(Long id);
 }
