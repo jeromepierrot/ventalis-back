@@ -28,11 +28,20 @@ public class Product {
     private Float unitPriceHt;
     @Builder.Default
     private Integer minOrderQuantity = 1000;
-    @Builder.Default
-    private String imageResourceUrl = "";
+
+    @ManyToOne
+    @JoinColumn(name = "id_picture")
+    private Picture picture;
 
     @Builder.Default
     private Boolean isVisible = false;
+
+    // TODO : field type to be determined by registerCode of Employee class
+    @Builder.Default
+    private String createdBy = "Created by inconnu"; // registerCode of the one employee who has created the product item
+
+    @Builder.Default
+    private String modifiedBy = "Modified by not known"; // registerCode of the one employee who has modified the product item
 
     @Temporal(TemporalType.TIMESTAMP)
     @Builder.Default
@@ -46,9 +55,10 @@ public class Product {
     public String toString(){
         return "{" +
                 "id=" + id +
-                ", category=" + category +
                 ", label=" + label +
+                ", picture=" + picture +
                 ", unitPriceHT=" + unitPriceHt +
+                ", category=" + category +
                 ", minOrderQuantity=" + unitPriceHt +
                 ", creationDate=" + createdDate +
                 ", modificationDate=" + modifiedDate +

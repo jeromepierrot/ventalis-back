@@ -94,11 +94,11 @@ public class ProductServiceImpl implements ProductService {
             Product productToUpdate = productRepository.getReferenceById(id);
 
             productToUpdate.setLabel(product.getLabel());
+            productToUpdate.setPicture(product.getPicture());
             productToUpdate.setDescription(product.getDescription());
-            productToUpdate.setCategory(product.getCategory());
             productToUpdate.setUnitPriceHt(product.getUnitPriceHt());
+            productToUpdate.setCategory(product.getCategory());
             productToUpdate.setMinOrderQuantity(product.getMinOrderQuantity());
-            productToUpdate.setImageResourceUrl(product.getImageResourceUrl());
             productToUpdate.setIsVisible(product.getIsVisible());
 
             productRepository.save(productToUpdate);
