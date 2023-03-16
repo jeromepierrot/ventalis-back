@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(Product product) { this.productRepository.save(product); }
 
-    // TODO : not fully implemented yet
+    // TODO : neither fully implemented nor tested yet
     /**
      * Add both product and its assigned category to the database.
      * @param product the product object to add to the database
@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProductWithCategory(Product product, Category category) {
 
-        if(this.categoryRepository.existsById(category.getId())) {
+        if(category.getId() != null) {
             product.setCategory(category); // either we set the category if it actually exists in the DB
         } else {
             this.categoryRepository.save(category); // or we create a new one based the value received
@@ -59,6 +59,17 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductsByLabel(String label) {
         return productRepository.findByLabel(label);
+    }
+
+    @Override
+    public List<Product> getProductsByCategory(Category category) {
+        return productRepository.findByCategory(category);
+    }
+
+
+    @Override
+    public List<Product> getProductsByDescription(String description) {
+        return productRepository.findByDescription(description);
     }
 
     /**

@@ -1,8 +1,10 @@
 package com.jpierrot.ventalismproducts.database;
 
+import com.jpierrot.ventalismproducts.pojo.Category;
 import com.jpierrot.ventalismproducts.pojo.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Date;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -10,15 +12,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByLabel(String label);
 
     // TODO : not fully implemented yet
-//    List<Product> findProductsByDescription(String description);
+    List<Product> findByDescription(String description);
 
     // TODO : not fully implemented yet
-//    List<Product> findProductsByCategory(Category category);
+    List<Product> findByCategory(Category category);
 
     // TODO : not fully implemented yet
-//    List<Product> findProductsByCreationDate(Date createdDate);
+    List<Product> findByCreatedDate(Date createdDate);
 
     // TODO : not fully implemented yet
-//    List<Product> findProductsByModificationDate(Date modifiedDate);
+    List<Product> findByModifiedDate(Date modifiedDate);
 
 }

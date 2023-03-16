@@ -14,10 +14,16 @@ public interface ProductService {
 
     List<Product> getAllProducts();
 
+    // TODO : see if refactorization needed
+    Optional<Product> getProductById(Long id);
+
     List<Product> getProductsByLabel(String name);
 
-    // TODO : to refactorize
-    Optional<Product> getProductById(Long id);
+    // TODO : not fully implemented
+    List<Product> getProductsByCategory(Category category);
+
+    // TODO : not fully implemented
+    List<Product> getProductsByDescription(String description);
 
     void updateProductById(Product product, Long id);
 

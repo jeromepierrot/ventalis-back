@@ -3,7 +3,7 @@ package com.jpierrot.ventalismproducts.pojo;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -34,14 +34,13 @@ public class Product {
     @Builder.Default
     private Boolean isVisible = false;
 
-    // TODO : add creationDate and modificationDate into Database schema
-/*
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
+    @Builder.Default
+    private Date createdDate = new Date(System.currentTimeMillis());
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date modifiedDate;
-*/
+    @Builder.Default
+    private Date modifiedDate = new Date(System.currentTimeMillis());
 
     @Override
     public String toString(){
@@ -51,6 +50,8 @@ public class Product {
                 ", label=" + label +
                 ", unitPriceHT=" + unitPriceHt +
                 ", minOrderQuantity=" + unitPriceHt +
+                ", creationDate=" + createdDate +
+                ", modificationDate=" + modifiedDate +
                 '}';
     }
 }

@@ -3,6 +3,8 @@ package com.jpierrot.ventalismproducts.pojo;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Builder
 @Getter
 @Setter
@@ -19,6 +21,14 @@ public class Category {
 
     @Builder.Default
     private Boolean isVisible = false;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Builder.Default
+    private Date createdDate = new Date(System.currentTimeMillis());
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Builder.Default
+    private Date modifiedDate = new Date(System.currentTimeMillis());
 
     @Override
     public String toString() {

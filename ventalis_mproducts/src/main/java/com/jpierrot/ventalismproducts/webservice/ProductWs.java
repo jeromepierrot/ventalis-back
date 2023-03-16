@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(ApiRouter.REST_CATALOG)
+@RequestMapping(ApiRouter.REST_PRODUCT)
 //@CrossOrigin(origins = "http://localhost:4200")
 public class ProductWs {
     private static final String NOT_FOUND_ERROR_MESSAGE = "Aucun produit trouvé";

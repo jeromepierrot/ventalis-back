@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS categories
 (
     id     BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
     name   VARCHAR(255),
-    is_visible BIT DEFAULT 0
+    is_visible BIT DEFAULT 0,
+    created_date DATETIME DEFAULT NOW(),
+    modified_date DATETIME DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS products
@@ -17,10 +19,10 @@ CREATE TABLE IF NOT EXISTS products
     min_order_quantity INT(11) DEFAULT 1000,
     image_resource_url VARCHAR(255) DEFAULT NULL,
     is_visible BIT(1) DEFAULT 0,
-    id_category BIGINT(20) DEFAULT NULL
-);
-
-ALTER TABLE products
-    ADD FOREIGN KEY (id_category)
+    id_category BIGINT(20) DEFAULT NULL,
+    created_date DATETIME DEFAULT NOW(),
+    modified_date DATETIME DEFAULT NOW(),
+    FOREIGN KEY (id_category)
         REFERENCES categories (id)
-        ON DELETE SET NULL ;
+        ON DELETE SET NULL
+);
