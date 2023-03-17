@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/ventalis_mmail" />
     <file type="web" url="file://$PROJECT_DIR$/ventalis_mmessages" />
     <file type="web" url="file://$PROJECT_DIR$/ventalis_morders" />
     <file type="web" url="file://$PROJECT_DIR$/ventalis_mproducts" />
@@ -11,6 +12,7 @@
         <option value="$PROJECT_DIR$/ventalis_mproducts/pom.xml" />
         <option value="$PROJECT_DIR$/ventalis_morders/pom.xml" />
         <option value="$PROJECT_DIR$/ventalis_mmessages/pom.xml" />
+        <option value="$PROJECT_DIR$/ventalis_mmail/pom.xml" />
       </list>
     </option>
   </component>
