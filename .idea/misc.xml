@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/ventalis_mmessages" />
     <file type="web" url="file://$PROJECT_DIR$/ventalis_morders" />
     <file type="web" url="file://$PROJECT_DIR$/ventalis_mproducts" />
+    <file type="web" url="file://$PROJECT_DIR$/ventalismsecurity" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -13,6 +14,7 @@
         <option value="$PROJECT_DIR$/ventalis_morders/pom.xml" />
         <option value="$PROJECT_DIR$/ventalis_mmessages/pom.xml" />
         <option value="$PROJECT_DIR$/ventalis_mmail/pom.xml" />
+        <option value="$PROJECT_DIR$/ventalismsecurity/pom.xml" />
       </list>
     </option>
   </component>
