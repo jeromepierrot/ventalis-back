@@ -1,1 +1,16 @@
-
+# application.yml - mmail
+# change setting according to SMTP provider settings
+# TODO : not tested yet
+spring:
+  mail:
+    host: "smtp**********.************"
+    port: 587 #depends on smtp provider
+    username: "*********@********"
+    password: "******************"
+    properties:
+      mail:
+        smtp:
+          auth: true #depends on smtp provider
+          starttls:
+            enable: true #depends on smtp provider
+            required: true #depends on smtp provider
