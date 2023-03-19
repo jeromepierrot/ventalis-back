@@ -13,7 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>ventalismsecurity</name>
-	<description>Ventalis Login Back-End (security)</description>
+	<description>Ventalis microservice for authentication (security)</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
