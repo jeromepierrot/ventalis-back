@@ -21,7 +21,7 @@ public class Product {
     @JoinColumn(name = "id_category")
     private Category category;
 
-    private String label;
+    private String label; // TODO : Should be unique (-> this constraint is done in MariaDB's side)
 
     @Builder.Default
     private String description = "";

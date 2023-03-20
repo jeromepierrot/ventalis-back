@@ -1,14 +1,14 @@
-# MariaDB configuration for micro-products
+# MariaDB configuration for micro-orders
 server:
-  port: 9081
+  port: 9082
 
 # JDBC Configuration
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_productsdb
-    username: ***********
-    password: ***********
+    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_ordersdb
+    username: *************
+    password: *************
 
 # JPA Configuration
   jpa:
