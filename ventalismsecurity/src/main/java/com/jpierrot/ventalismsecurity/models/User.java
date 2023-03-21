@@ -50,12 +50,12 @@ public class User extends GenericUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // TODO: return true for starting/testing should be implemented later.
+        return super.getIsEnabled();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // TODO: return true for starting/testing should be implemented later.
+        return super.getIsEnabled();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class User extends GenericUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled();
+        return (isAccountNonExpired() && isAccountNonLocked());
     }
 }

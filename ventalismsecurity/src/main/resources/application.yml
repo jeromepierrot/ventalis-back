@@ -1,6 +1,6 @@
 # MariaDB configuration for micro-security
 server:
-  port: 9090
+  port: 8089
 
 # JDBC Configuration
 spring:
@@ -12,13 +12,14 @@ spring:
 
   # JPA Configuration
   jpa:
-    database-platform: org.hibernate.dialect
     database: mysql
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
     hibernate:
       ddl-auto: validate # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MariaDB106Dialect
+#        dialect: org.hibernate.dialectMariaDB106Dialect
+        format_sql: true
     show-sql: true # to see sql commands
 
   # SQL Initialisation

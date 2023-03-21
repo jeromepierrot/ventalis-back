@@ -23,9 +23,6 @@ import java.util.List;
 @NoArgsConstructor
 @Entity(name="admins")
 public class Admin extends GenericUser implements UserDetails {
-
-    //    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employees_gen")// Sequences are new in MariaDB
-//    @SequenceGenerator(name = "employees_gen", sequenceName = "employees_seq", initialValue = 1000)
     @Column(name = "registration_code", nullable = false)
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long registrationCode;
@@ -47,12 +44,12 @@ public class Admin extends GenericUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true; // TODO: return true for starting/testing should be implemented later.
+        return super.getIsEnabled();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true; // TODO: return true for starting/testing should be implemented later.
+        return super.getIsEnabled();
     }
 
     @Override
@@ -62,6 +59,6 @@ public class Admin extends GenericUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return super.getIsEnabled();
+        return (isAccountNonExpired() && isAccountNonLocked());
     }
 }
