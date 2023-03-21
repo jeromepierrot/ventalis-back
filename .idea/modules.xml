@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/ventalis_morders/morders.iml" filepath="$PROJECT_DIR$/ventalis_morders/morders.iml" />
       <module fileurl="file://$PROJECT_DIR$/ventalis_mproducts/mproducts.iml" filepath="$PROJECT_DIR$/ventalis_mproducts/mproducts.iml" />
       <module fileurl="file://$PROJECT_DIR$/msecurity/msecurity.iml" filepath="$PROJECT_DIR$/msecurity/msecurity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ventalis_mmail/ventalis-mmail.iml" filepath="$PROJECT_DIR$/ventalis_mmail/ventalis-mmail.iml" />
       <module fileurl="file://$PROJECT_DIR$/ventalis_mmail/ventalis_mmail.iml" filepath="$PROJECT_DIR$/ventalis_mmail/ventalis_mmail.iml" />
       <module fileurl="file://$PROJECT_DIR$/ventalismsecurity/ventalismsecurity.iml" filepath="$PROJECT_DIR$/ventalismsecurity/ventalismsecurity.iml" />
     </modules>
