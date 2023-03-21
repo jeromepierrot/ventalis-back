@@ -12,6 +12,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Employee entity class for 'Employee' user
+ * Extends 'GenericUser' abstract class and implements 'UserDetails' interface (from Spring security)
+ */
 @SuperBuilder //required when using superclass
 @Getter
 @Setter
