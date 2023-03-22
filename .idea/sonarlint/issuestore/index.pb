@@ -23,5 +23,3 @@ J
 ^ventalis_mproducts/src/main/java/com/jpierrot/ventalismproducts/api/webservice/CategoryWs.java,f/d/fd9b70a0af8f64142ed0465b0ef96625c0350232
 ‚
 Rventalis_mmail/src/main/java/com/jpierrot/ventalismmail/services/EmailService.java,8/2/82c299b3dcb18cb0f8e2c872bed9d89176445e37
-€
-Pventalismsecurity/src/main/java/com/jpierrot/ventalismsecurity/models/Roles.java,e/5/e5acfbf6a4f3b27e2f916d657bb413b5856384f5

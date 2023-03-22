@@ -3,6 +3,9 @@ package com.jpierrot.ventalismsecurity.models;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
@@ -14,10 +17,11 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass // 1 Inheritance Strategy amongst 4
-/*@Inheritance(strategy = InheritanceType.JOINED)
-public class GenericUser implements UserDetails {*/
-public class GenericUser {
+@Entity(name = "users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="role_type")
+@DiscriminatorValue("GENERIC")
+public class GenericUser implements UserDetails {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,7 +36,7 @@ public class GenericUser {
 
     /* Careful: email here is the login, so it is equivalent to 'username' in UserDetails interface.
     'getUsername()' is its Getter/Setter */
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     /* Careful: if this attribute is called 'password', getPassword() won't appear but needs to be overridden from UserDetails */
@@ -55,9 +59,36 @@ public class GenericUser {
     @Column(name = "modified_date")
     private Date modifiedDate = new Date(System.currentTimeMillis());
 
-    /******* static Methods ******/
-    public static String autoGeneratePassword() {
-        String randomPassword = "A23rty1!"; // TODO : auto-generate a password of minLength=8 characters, with 1 Maj char, 1 min char, 1 number, 1 special char
-        return randomPassword;
+
+    /* Implemented methods from UserDetails */
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(getRole().toString()));
+    }
+
+    @Override
+    public String getUsername() {
+        return getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return getIsEnabled();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return getIsEnabled();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return getIsEnabled();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return (isAccountNonExpired() && isAccountNonLocked());
     }
 }

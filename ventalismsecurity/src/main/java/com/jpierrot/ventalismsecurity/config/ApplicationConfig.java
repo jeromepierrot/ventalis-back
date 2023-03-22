@@ -1,7 +1,6 @@
 package com.jpierrot.ventalismsecurity.config;
 
-import com.jpierrot.ventalismsecurity.repository.EmployeeRepository;
-import com.jpierrot.ventalismsecurity.repository.UserRepository;
+import com.jpierrot.ventalismsecurity.repository.GenericUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +17,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-    private final UserRepository userRepository;
-    //private final EmployeeRepository employeeRepository;
+    private final GenericUserRepository genericUserRepository;
 
-    // TODO: add 'adminRepository' and 'employeeRepository'
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
+        return username -> genericUserRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
     }
 
     @Bean

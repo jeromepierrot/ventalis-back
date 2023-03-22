@@ -1,31 +1,9 @@
+DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS admins;
-DROP TABLE IF EXISTS employees;
 
-CREATE TABLE IF NOT EXISTS admins (
+CREATE TABLE IF NOT EXISTS companies (
     id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE KEY,
-    password VARCHAR(256) NOT NULL,
-    lastname VARCHAR(255) NOT NULL,
-    firstname VARCHAR(255),
-    role VARCHAR(255),
-    is_enabled BIT DEFAULT 1,
-    registration_code BIGINT(20) DEFAULT(UUID_SHORT()) UNIQUE KEY,
-    created_date DATETIME DEFAULT NOW(),
-    modified_date DATETIME DEFAULT NOW()
-);
-
-CREATE TABLE IF NOT EXISTS employees (
-    id BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE KEY,
-    password VARCHAR(256) NOT NULL,
-    lastname VARCHAR(255) NOT NULL,
-    firstname VARCHAR(255),
-    role VARCHAR(255),
-    is_enabled BIT DEFAULT 1,
-    registration_code BIGINT(20) DEFAULT(UUID_SHORT()) UNIQUE KEY,
-    created_date DATETIME DEFAULT NOW(),
-    modified_date DATETIME DEFAULT NOW()
+    company_name VARCHAR(255) NOT NULL UNIQUE KEY
 );
 
 CREATE TABLE IF NOT EXISTS users (
@@ -33,15 +11,20 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) NOT NULL UNIQUE KEY,
     password VARCHAR(256) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
-    firstname VARCHAR(255),
-    role VARCHAR(255),
+    firstname VARCHAR(255) DEFAULT NULL,
+    role VARCHAR(255) NOT NULL,
     is_enabled BIT DEFAULT 1,
-    company VARCHAR(255) NOT NULL,
-    adviser_id     BIGINT(20),
+    company_id BIGINT(20) DEFAULT NULL,
+    adviser_id BIGINT(20) DEFAULT NULL,
+    registration_code BIGINT(16) DEFAULT NULL,
     created_date DATETIME DEFAULT NOW(),
     modified_date DATETIME DEFAULT NOW(),
     FOREIGN KEY (adviser_id)
-        REFERENCES employees(id)
+        REFERENCES users(id)
+        ON DELETE NO ACTION
+        ON UPDATE CASCADE,
+    FOREIGN KEY (company_id)
+        REFERENCES companies(id)
         ON DELETE NO ACTION
         ON UPDATE CASCADE
 );

@@ -2,9 +2,8 @@ package com.jpierrot.ventalismsecurity.services.auth;
 
 import com.jpierrot.ventalismsecurity.models.*;
 import com.jpierrot.ventalismsecurity.models.auth.*;
-import com.jpierrot.ventalismsecurity.repository.AdminRepository;
-import com.jpierrot.ventalismsecurity.repository.EmployeeRepository;
-import com.jpierrot.ventalismsecurity.repository.UserRepository;
+import com.jpierrot.ventalismsecurity.models.entities.Company;
+import com.jpierrot.ventalismsecurity.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,12 +17,14 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
+    private final GenericUserRepository genericUserRepository;
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService ;
     private final AuthenticationManager authenticationManager;
+    private final CompanyRepository companyRepository;
 
 
     /**
@@ -35,20 +36,37 @@ public class AuthService {
      */
     public AuthResponse register(UserRegisterRequest request) {
 
+        var company = Company.builder()
+                .name(request.getCompany())
+                .build();
+
+        if (companyRepository.findByName(request.getCompany()).isPresent()) {
+            company = companyRepository.findByName(company.getName()).get();
+        }
+
+        companyRepository.save(company);
+
+        var adviser = new Employee();
+
+        // TODO: allocate one adviser for testing but should be modified by finding the right adviser
+        if (employeeRepository.findById(1L).isPresent()) {
+            adviser = (Employee) employeeRepository.findById(1L).get();
+        }
+
         var user = User.builder()
-                .company(request.getCompany())
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Roles.USER) /* forces 'USER' role to prevent any privilege elevation */
+                .companyId(company)
+                .adviserId(adviser)
                 .isEnabled(true)
                 .build();
 
-                // TODO: allocate one adviser for testing but should be modified by finding the right adviser
-        employeeRepository.findById(1L).ifPresent(adviser -> {
-                    user.setAdviserId(adviser);
-                });
+/*        employeeRepository.findById(1L).ifPresent(adviser -> {
+                    user.setAdviserId((Employee) adviser);
+                });*/
 
         /* insert into database */
         userRepository.save(user);
@@ -141,9 +159,14 @@ public class AuthService {
                         request.getPassword()
                 )
         );
-        var user = userRepository.findByEmail(request.getEmail())
+        var user = genericUserRepository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
+
+        /* generate JWT */
+        Map<String, Object> extraClaims  = new HashMap<>();
+        extraClaims.put("roles", user.getRole());
+        var jwtToken = jwtService.generateToken(extraClaims, user);
+
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();
