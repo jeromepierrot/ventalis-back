@@ -27,6 +27,13 @@ public class AuthRestController {
         return ResponseEntity.ok(authService.register(request));
     }
 
+    @PostMapping(ApiRouter.REST_REGISTER_ADMIN)
+    public ResponseEntity<AuthResponse> register (
+            @RequestBody AdminRegisterRequest request
+    ) {
+        return ResponseEntity.ok(authService.register(request));
+    }
+
     @PostMapping(ApiRouter.REST_AUTH)
     public ResponseEntity<AuthResponse> authenticate (
             @RequestBody AuthRequest request

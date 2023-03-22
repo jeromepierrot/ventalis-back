@@ -1,6 +1,5 @@
 package com.jpierrot.ventalismsecurity.models.auth;
 
-import com.jpierrot.ventalismsecurity.models.Roles;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -13,6 +12,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @RequiredArgsConstructor
 public class EmployeeRegisterRequest extends RegisterRequest {
-
+    private Long registrationCode;
 }
 

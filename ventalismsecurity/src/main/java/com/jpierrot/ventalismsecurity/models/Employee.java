@@ -13,15 +13,22 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Employee entity class for 'Employee' user
+ * TODO : Employee entity class for 'Employee' and 'Admin' accounts
+ * TODO : Only the 'Role' is different between 'Employee' and 'Admin' accounts
  * Extends 'GenericUser' abstract class and implements 'UserDetails' interface (from Spring security)
  */
 @SuperBuilder //required when using superclass
 @Getter
 @Setter
 @RequiredArgsConstructor
-@Entity(name="employees")
+@Entity
+@Table(
+        name="employees",
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"email","registration_code"})
+)
 public class Employee extends GenericUser implements UserDetails {
+//    @Builder.Default
     @Column(name = "registration_code", nullable = false)
     @JdbcTypeCode(SqlTypes.BIGINT)
     private Long registrationCode;

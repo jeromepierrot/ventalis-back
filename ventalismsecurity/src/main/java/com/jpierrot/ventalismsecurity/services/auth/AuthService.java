@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -27,13 +28,13 @@ public class AuthService {
 
     /**
      * Standard method to register one 'User' (= client)
-     * This method should not be called to register an 'Employee' or an 'Admin'
+     * This method should not be called to register any 'Employee' or 'Admin'
      * Otherwise, role will not be granted correctly
-     * @param request 'User' registration request only (not Employee nor Admin)
+     * @param request 'User' registration request only (not Employee, nor Admin)
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
     public AuthResponse register(UserRegisterRequest request) {
-        // TODO : add needed field according to User
+
         var user = User.builder()
                 .company(request.getCompany())
                 .firstname(request.getFirstname())
@@ -53,12 +54,9 @@ public class AuthService {
         userRepository.save(user);
 
         /* generate JWT */
-/*
         Map<String, Object> extraClaims  = new HashMap<>();
         extraClaims.put("roles", Roles.USER.name());
         var jwtToken = jwtService.generateToken(extraClaims, user);
-*/
-        var jwtToken = jwtService.generateToken(user);
 
         return AuthResponse.builder()
                 .token(jwtToken)
@@ -66,20 +64,25 @@ public class AuthService {
     }
 
     /**
-     * Standard method to register one 'User' (= client)
-     * This method should not be called to register an 'Employee' or an 'Admin'
-     * Otherwise, role will not be granted correctly
-     * @param request 'User' registration request only (not Employee nor Admin)
+     * Standard method to register one 'Employee'
+     * This method should not be called to register any 'User' or 'Admin'
+     * Otherwise, role will be granted incorrectly
+     * @param request 'Employee' registration request only (not User, nor Admin)
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
     public AuthResponse register(EmployeeRegisterRequest request) {
-        // TODO : add needed field according to User
+        /* Generate Random registration Code (SHORT UUID Like) */
+        Integer randomNumber = new Random(System.currentTimeMillis()).nextInt(99999999);
+        Long registrationCode =  randomNumber.longValue();
+
         var employee = Employee.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Roles.EMPLOYEE) /* forces 'EMPLOYEE' role to prevent any privilege elevation */
+                .registrationCode(registrationCode)
+                .isEnabled(true)
                 .build();
 
         /* insert into database */
@@ -87,9 +90,39 @@ public class AuthService {
 
         /* generate JWT */
         Map<String, Object> extraClaims  = new HashMap<>();
-        extraClaims.put("roles", Roles.EMPLOYEE.name());
+        extraClaims.put("roles", employee.getRole());
         var jwtToken = jwtService.generateToken(extraClaims, employee);
 
+        return AuthResponse.builder()
+                .token(jwtToken)
+                .build();
+    }
+
+    /**
+     * Standard method to register one 'Administrator'
+     * This method should not be called to register any 'User' or 'Employee'
+     * Otherwise, role will be granted incorrectly
+     * @param request 'Admin' registration request only (not User, nor Employee)
+     * @return one valid JWT token according to JwtAuthFilter configuration
+     */
+    public AuthResponse register(AdminRegisterRequest request) {
+        var admin = Admin.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Roles.ADMIN) /* forces 'ADMIN' role to prevent any privilege elevation */
+                .registrationCode(generateRandomRegistrationCode())
+                .isEnabled(true)
+                .build();
+
+        /* insert into database */
+        adminRepository.save(admin);
+
+        /* generate JWT */
+        Map<String, Object> extraClaims  = new HashMap<>();
+        extraClaims.put("roles", admin.getRole());
+        var jwtToken = jwtService.generateToken(extraClaims, admin);
 
         return AuthResponse.builder()
                 .token(jwtToken)
@@ -98,7 +131,6 @@ public class AuthService {
 
 
     /**
-     * // TODO: dev in progress, only authenticating User / need to implement Employee and Admin
      * @param request to authenticate any 'User', 'Employee' or 'Admin'
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
@@ -115,5 +147,14 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    /**
+     * Generate Random registration Code (SHORT UUID Like)
+     * @return one random 8-bytes value (numbers onlu)
+     *  */
+    public Long generateRandomRegistrationCode() {
+        Integer randomNumber = new Random(System.currentTimeMillis()).nextInt(99999999);
+        return randomNumber.longValue();
     }
 }

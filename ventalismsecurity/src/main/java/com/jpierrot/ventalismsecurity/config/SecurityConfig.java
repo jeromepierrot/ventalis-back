@@ -24,7 +24,6 @@ public class SecurityConfig {
         // TODO: ** PRODUCTION - IMPORTANT ** => réactiver la configuration csrf pour la production
         // TODO: ** PRODUCTION - IMPORTANT ** => configurer CORS
         http
-                .httpBasic().disable()
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
@@ -40,16 +39,6 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors().disable()
         ;
-        /*http
-                .csrf().disable()
-                .cors().disable()
-                .httpBasic().disable()
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/resources/**", "/signup", "/about").permitAll()
-                        .requestMatchers("/api/v1/login/**").hasRole("USER")
-                        .requestMatchers("/api/v1/admin/**").access(AuthorizationManagers.anyOf(AuthorityAuthorizationManager.hasRole("ADMIN"), AuthorityAuthorizationManager.hasRole("EMPLOYEE")))
-                        .anyRequest().denyAll()
-                );*/
 
         return http.build();
     }
