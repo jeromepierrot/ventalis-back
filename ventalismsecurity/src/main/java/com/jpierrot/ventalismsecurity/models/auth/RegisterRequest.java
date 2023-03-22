@@ -2,13 +2,14 @@ package com.jpierrot.ventalismsecurity.models.auth;
 
 import com.jpierrot.ventalismsecurity.models.Roles;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
-    private String company; // TODO: for testing first to be removed later
+//    private String company; // TODO: for testing first to be removed later
     private String lastname;
     private String firstname;
     private String email; /* email = login (= username for UserDetails interface */

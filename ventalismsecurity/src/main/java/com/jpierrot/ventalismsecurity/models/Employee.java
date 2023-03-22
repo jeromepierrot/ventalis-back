@@ -19,8 +19,7 @@ import java.util.List;
 @SuperBuilder //required when using superclass
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity(name="employees")
 public class Employee extends GenericUser implements UserDetails {
     @Column(name = "registration_code", nullable = false)

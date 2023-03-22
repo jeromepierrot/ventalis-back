@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.*;
 
 /**
- * Abstract class that is sharing all common 'User', 'Employee' and 'Admin' attributes and static methods
+ * Mapped superclass that is sharing all common 'User', 'Employee' and 'Admin' attributes and static methods
  */
 @SuperBuilder
 @Getter

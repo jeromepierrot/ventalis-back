@@ -41,10 +41,6 @@ public class JwtService {
                 .getBody();
     }
 
-    public String generateToken(UserDetails usersDetails) {
-        return generateToken(new HashMap<>(), usersDetails);
-    }
-
     public boolean isTokenValid (String token, UserDetails userdetails) {
         final String username = extractUsername(token);
         return (username.equals(userdetails.getUsername())) && !isTokenExpired(token);
@@ -57,6 +53,11 @@ public class JwtService {
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
+
+    public String generateToken(UserDetails usersDetails) {
+        return generateToken(new HashMap<>(), usersDetails);
+    }
+
     public String generateToken(
             Map<String, Object> extraClaims,
             UserDetails userDetails

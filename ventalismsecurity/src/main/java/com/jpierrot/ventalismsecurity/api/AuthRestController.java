@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequiredArgsConstructor
 public class AuthRestController {
-    private final AuthService service;
+    private final AuthService authService;
 
     @PostMapping(ApiRouter.REST_REGISTER_USER)
     public ResponseEntity<AuthResponse> register (
-            @RequestBody RegisterRequest request
+            @RequestBody UserRegisterRequest request
     ) {
-        return ResponseEntity.ok(service.register(request));
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping(ApiRouter.REST_REGISTER_EMPLOYEE)
     public ResponseEntity<AuthResponse> register (
             @RequestBody EmployeeRegisterRequest request
     ) {
-        return ResponseEntity.ok(service.register(request));
+        return ResponseEntity.ok(authService.register(request));
     }
 
     @PostMapping(ApiRouter.REST_AUTH)
     public ResponseEntity<AuthResponse> authenticate (
             @RequestBody AuthRequest request
     ) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(authService.authenticate(request));
     }
 }

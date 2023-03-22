@@ -2,6 +2,7 @@ package com.jpierrot.ventalismsecurity.models.auth;
 
 import com.jpierrot.ventalismsecurity.models.Roles;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 /**
  * Stores any 'Employee' registration request from REST API
@@ -9,9 +10,8 @@ import lombok.*;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@SuperBuilder
+@RequiredArgsConstructor
 public class EmployeeRegisterRequest extends RegisterRequest {
 
 }

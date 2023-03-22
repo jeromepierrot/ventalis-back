@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS users (
     firstname VARCHAR(255),
     role VARCHAR(255),
     is_enabled BIT DEFAULT 1,
-    company VARCHAR(255) NOT NULL UNIQUE KEY,
-    adviser_id     BIGINT(20) NOT NULL,
+    company VARCHAR(255) NOT NULL,
+    adviser_id     BIGINT(20),
     created_date DATETIME DEFAULT NOW(),
     modified_date DATETIME DEFAULT NOW(),
     FOREIGN KEY (adviser_id)

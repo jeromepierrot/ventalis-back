@@ -11,6 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -29,7 +32,7 @@ public class AuthService {
      * @param request 'User' registration request only (not Employee nor Admin)
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
-    public AuthResponse register(RegisterRequest request) {
+    public AuthResponse register(UserRegisterRequest request) {
         // TODO : add needed field according to User
         var user = User.builder()
                 .company(request.getCompany())
@@ -38,82 +41,61 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Roles.USER) /* forces 'USER' role to prevent any privilege elevation */
+                .isEnabled(true)
                 .build();
 
-        //Employee adviser;
+                // TODO: allocate one adviser for testing but should be modified by finding the right adviser
+        employeeRepository.findById(1L).ifPresent(adviser -> {
+                    user.setAdviserId(adviser);
+                });
 
-        /*switch (user.getRole()) {
-            case USER -> {
-                adviser = employeeRepository.findById(1L).orElse(null); // TODO: test value to be changed by a request to find the right adviser
-                user.setCompany(request.getCompany());
-                // TODO : add code to attribute a adviser (=employee) to the user
-                // TODO: find another default value other than NULL
-                user.setAdviserId(adviser);
-                user.setIsEnabled(true);
-                userRepository.save(user);
-            }
-            default -> {
-                *//* if the role is not 'USER',
-                   role is changed to 'UNAUTHORIZED' + account is disabled, then saved into User Database to prevent further auth attempts *//*
-                user.setRole(Roles.UNAUTHORIZED);
-                user.setIsEnabled(false);
-                userRepository.save(user);
-            }
-        }*/
+        /* insert into database */
+        userRepository.save(user);
 
+        /* generate JWT */
+/*
+        Map<String, Object> extraClaims  = new HashMap<>();
+        extraClaims.put("roles", Roles.USER.name());
+        var jwtToken = jwtService.generateToken(extraClaims, user);
+*/
         var jwtToken = jwtService.generateToken(user);
+
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();
     }
 
     /**
-     * method to register an Employee or an Administrator, depending on the chosen role
-     * This method should only be called from the Administrator space
-     * @param employeeRequest 'Employee' (or 'Administrator') registration request only (not for standard 'User' / clients)
+     * Standard method to register one 'User' (= client)
+     * This method should not be called to register an 'Employee' or an 'Admin'
+     * Otherwise, role will not be granted correctly
+     * @param request 'User' registration request only (not Employee nor Admin)
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
-    public AuthResponse register(EmployeeRegisterRequest employeeRequest) {
-        // TODO : add needed field according to User + check if an 'AdminRegisterRequest' method is required (should NOT)
-        var user = GenericUser.builder()
-                .firstname(employeeRequest.getFirstname())
-                .lastname(employeeRequest.getLastname())
-                .email(employeeRequest.getEmail())
-                .password(passwordEncoder.encode(employeeRequest.getPassword()))
-                .role(Roles.EMPLOYEE) /* TODO: should be 'ADMIN' or 'EMPLOYEE' but not 'USER'*/
+    public AuthResponse register(EmployeeRegisterRequest request) {
+        // TODO : add needed field according to User
+        var employee = Employee.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Roles.EMPLOYEE) /* forces 'EMPLOYEE' role to prevent any privilege elevation */
                 .build();
 
-        Employee newEmployee = (Employee) user;
-        Admin newAdmin = (Admin) user;
-        User newUser = (User) user;
+        /* insert into database */
+        employeeRepository.save(employee);
 
-        switch (user.getRole()) {
-            case EMPLOYEE -> {
-                user.setIsEnabled(true);
-//                newEmployee = (Employee) user;
-                employeeRepository.save(newEmployee);
-            }
-            case ADMIN -> {
-                user.setIsEnabled(true);
+        /* generate JWT */
+        Map<String, Object> extraClaims  = new HashMap<>();
+        extraClaims.put("roles", Roles.EMPLOYEE.name());
+        var jwtToken = jwtService.generateToken(extraClaims, employee);
 
-                adminRepository.save(newAdmin);
-            }
-            default -> {
-                /* if the role is not 'EMPLOYEE' or 'ADMIN',
-                   role is changed to 'UNAUTHORIZED' + account is disabled, then saved into User Database  */
-                user.setRole(Roles.UNAUTHORIZED);
-                user.setIsEnabled(false);
-                newUser = (User) user;
-                userRepository.save(user);
-            }
-        }
-
-        var jwtToken = jwtService.generateToken(newEmployee);
 
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
 
     /**
      * // TODO: dev in progress, only authenticating User / need to implement Employee and Admin
