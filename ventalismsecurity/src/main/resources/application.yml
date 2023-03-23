@@ -15,7 +15,7 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MariaDB106Dialect
     hibernate:
-      ddl-auto: validate # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
+      ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
 #        dialect: org.hibernate.dialectMariaDB106Dialect
@@ -25,5 +25,5 @@ spring:
   # SQL Initialisation
   sql:
     init:
-      mode: always # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
+      mode: never # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
       platform: mysql # specify the suffix of schema-{platform}.sql and data-{plateform}.sql files

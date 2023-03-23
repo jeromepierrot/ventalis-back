@@ -1,10 +1,9 @@
 package com.jpierrot.ventalismsecurity.models;
 
+import com.jpierrot.ventalismsecurity.models.entities.RegistrationCode;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 /**
  * TODO : Employee entity class for 'Employee' and 'Admin' accounts
@@ -18,10 +17,10 @@ import org.hibernate.type.SqlTypes;
 @Entity
 @DiscriminatorValue("Employee")
 public class Employee extends GenericUser {
-//    @Builder.Default
-    @Column(name = "registration_code", nullable = false)
-    @JdbcTypeCode(SqlTypes.BIGINT)
-    private Long registrationCode;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "regcode", referencedColumnName = "id")
+    private RegistrationCode regcodeId;
 
 /*    @OneToMany(fetch = FetchType.LAZY, mappedBy = "adviserId")
     private List<User> users;*/

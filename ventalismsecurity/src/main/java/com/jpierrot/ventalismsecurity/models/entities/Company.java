@@ -18,7 +18,7 @@ public class Company implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name="name", unique = true)
+    @Column(name="name", nullable = false, unique = true)
     String name;
 
     @OneToOne(mappedBy = "companyId")

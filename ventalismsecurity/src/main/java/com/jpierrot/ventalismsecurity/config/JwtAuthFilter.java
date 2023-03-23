@@ -41,7 +41,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         /* token exists but user is NOT connected */
-        jwt = authHeader.substring(7); // get the token by jumping the "Bearer " string at start of the header
+        jwt = authHeader.substring(7); // get the token by jumping the "Bearer " string at the start of the header
         userEmail = jwtService.extractUsername(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             // we need to check whether the token is valid, then if yes, set the SecurityContextHolder accordingly
