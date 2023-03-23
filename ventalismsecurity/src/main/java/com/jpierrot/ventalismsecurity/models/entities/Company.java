@@ -1,6 +1,5 @@
 package com.jpierrot.ventalismsecurity.models.entities;
 
-import com.jpierrot.ventalismsecurity.models.User;
 import jakarta.persistence.*;
 import lombok.*;
 

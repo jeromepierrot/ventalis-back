@@ -1,7 +1,6 @@
 package com.jpierrot.ventalismsecurity.repository;
 
-import com.jpierrot.ventalismsecurity.models.GenericUser;
-import com.jpierrot.ventalismsecurity.models.User;
+import com.jpierrot.ventalismsecurity.models.entities.GenericUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,6 +1,5 @@
-package com.jpierrot.ventalismsecurity.models;
+package com.jpierrot.ventalismsecurity.models.entities;
 
-import com.jpierrot.ventalismsecurity.models.entities.RegistrationCode;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

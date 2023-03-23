@@ -1,6 +1,5 @@
 package com.jpierrot.ventalismsecurity.models.entities;
 
-import com.jpierrot.ventalismsecurity.models.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;

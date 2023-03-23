@@ -1,9 +1,7 @@
 package com.jpierrot.ventalismsecurity.services.auth;
 
-import com.jpierrot.ventalismsecurity.models.*;
 import com.jpierrot.ventalismsecurity.models.auth.*;
-import com.jpierrot.ventalismsecurity.models.entities.Company;
-import com.jpierrot.ventalismsecurity.models.entities.RegistrationCode;
+import com.jpierrot.ventalismsecurity.models.entities.*;
 import com.jpierrot.ventalismsecurity.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +24,6 @@ public class AuthService {
     private final CompanyRepository companyRepository;
     private final RegistrationCodeRepository registrationCodeRepository;
 
-
     /**
      * Standard method to register one 'User' (= client)
      * This method should not be called to register any 'Employee' or 'Admin'
@@ -35,19 +32,17 @@ public class AuthService {
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
     public AuthResponse register(UserRegisterRequest request) {
-
+        /* TODO : the whole thing here should be a Transaction */
         /* TODO: add a validation password checker/parser first */
 
-        /* Check if company exists, then add it if not TODO : refactorize as static method  */
-        var company = Company.builder()
-                .name(request.getCompany())
-                .build();
+        /* Check if company exists, then add it if not existing */
+        var company = findIfExistsRequestedCompany(request);
 
-        if (companyRepository.findByName(request.getCompany()).isPresent()) {
-            company = companyRepository.findByName(company.getName()).get();
+        /* We only add a new company code into DB if the email is not registered yet and password respects the rules */
+        /* Otherwise, we don't persist it */
+        if (genericUserRepository.findByEmail(request.getEmail()).isEmpty()) {
+            companyRepository.save(company);
         }
-
-        companyRepository.save(company);
 
         var adviser = new Employee();
 
@@ -92,23 +87,17 @@ public class AuthService {
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
     public AuthResponse register(EmployeeRegisterRequest request) {
-
+        /* TODO : the whole thing here should be a Transaction */
         /* TODO: add a validation password checker/parser first */
 
-        /* Generate a new random Registration Code  TODO : to refactorize*/
-        Long randomCode;
-        do {
-            randomCode = generateRandomRegistrationCode();
-        } while (registrationCodeRepository.findByRegcode(randomCode).isPresent()); /* check if randomRegcode already exist */
-
+        /* Generate a new unique random Registration Code */
         var regcode = RegistrationCode.builder()
-                .regcode(randomCode)
+                .regcode(generateUniqueRandomRegistrationCode())
                 .build();
 
-        /* We only add the regcode into DB only if the email is not registered yet and password respects the rules */
+        /* We only add the new registration code into DB if the email is not registered yet and password respects the rules */
         /* Otherwise, we don't persist it */
-        if (genericUserRepository.findByEmail(request.getEmail()).isEmpty()
-            /* TODO : && isValidPassword(request.getPassword())*/) {
+        if (genericUserRepository.findByEmail(request.getEmail()).isEmpty()) {
             registrationCodeRepository.save(regcode);
         }
 
@@ -123,6 +112,7 @@ public class AuthService {
                 .build();
 
         /* insert the new employee into database, only if any other user have the same email yet */
+
         employeeRepository.save(employee);
 
 
@@ -139,27 +129,25 @@ public class AuthService {
                 .build();
     }
 
+    //TODO : could be refactorized using Employee Request
     /**
-     * Standard method to register one 'Administrator' //TODO : could be refactorized using Employee Request
+     * Standard method to register one 'Administrator'
      * This method should not be called to register any 'User' or 'Employee'
      * Otherwise, role will be granted incorrectly
      * @param request 'Admin' registration request only (not User, nor Employee)
      * @return one valid JWT token according to JwtAuthFilter configuration
      */
     public AuthResponse register(AdminRegisterRequest request) {
+        /* TODO : the whole thing here should be a Transaction */
+        /* TODO: add a validation password checker/parser first */
 
-        /* Generate a new random Registration Code */
-        Long randomCode;
-        do {
-            randomCode = generateRandomRegistrationCode();
-        } while (registrationCodeRepository.findByRegcode(randomCode).isPresent()); /* check if randomRegcode already exist */
-
+        /* Generate a new unique random Registration Code */
         var regcode = RegistrationCode.builder()
-                .regcode(randomCode)
+                .regcode(generateUniqueRandomRegistrationCode())
                 .build();
 
-        /* We only add the regcode into DB only if the email is not registered yet */
-        /* Otherwise,  */
+        /* We only add the new registration code into DB if the email is not registered yet and password respects the rules */
+        /* Otherwise, we don't persist it */
         if (genericUserRepository.findByEmail(request.getEmail()).isEmpty()) {
             registrationCodeRepository.save(regcode);
         }
@@ -216,6 +204,38 @@ public class AuthService {
         return AuthResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    /* ******** STATIC METHODS ********* */
+    // TODO : to refactorize those static methods into their own classes
+
+    /**
+     *  Check if the requested company already exists, then return a Company object (new one or existing one)
+     * @param request Request from one User only, the request may contain a company name for registration
+     * @return either the existing Company if exists, or a new Company according to the request
+     *  */
+    public Company findIfExistsRequestedCompany(UserRegisterRequest request) {
+        var company = Company.builder()
+                .name(request.getCompany())
+                .build();
+
+            if (companyRepository.findByName(request.getCompany()).isPresent()) {
+                company = companyRepository.findByName(company.getName()).get();
+            }
+        return company;
+    }
+
+
+    /**
+     *  Generate a new random Registration Code
+     *  */
+    public Long generateUniqueRandomRegistrationCode() {
+    Long randomCode;
+        do {
+        randomCode = generateRandomRegistrationCode();
+    } while (registrationCodeRepository.findByRegcode(randomCode).isPresent()); /* check if randomRegcode already exist */
+
+        return randomCode;
     }
 
     /**

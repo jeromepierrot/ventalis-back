@@ -1,6 +1,6 @@
 package com.jpierrot.ventalismsecurity.repository;
 
-import com.jpierrot.ventalismsecurity.models.Employee;
+import com.jpierrot.ventalismsecurity.models.entities.Employee;
 
 import java.util.Optional;
 

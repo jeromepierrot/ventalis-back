@@ -1,4 +1,4 @@
-package com.jpierrot.ventalismsecurity.models;
+package com.jpierrot.ventalismsecurity.models.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
