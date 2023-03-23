@@ -1,21 +1,27 @@
 server:
-  port: 8080
+  port: 9081
 
 # JDBC Configuration
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_productsdb
-    username: ventalis-*******
-    password: ************
+    username: ***********
+    password: ***********
 # JPA Configuration
 
   jpa:
     database-platform: org.hibernate.dialect
     database: mysql
     hibernate:
-      ddl-auto: create-drop # other options : none, validate, update, create-drop
+      ddl-auto: validate # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDB106Dialect
     show-sql: true # to see sql commands
+
+# SQL Initialisation
+  sql:
+    init:
+      mode: never # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
+      platform: mysql # specify the suffix of schema-{platform}.sql and data-{plateform}.sql files

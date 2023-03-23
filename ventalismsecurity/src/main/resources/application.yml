@@ -1,0 +1,29 @@
+# MariaDB configuration for micro-security
+server:
+  port: 8089
+
+# JDBC Configuration
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_logindb
+    username: ***********
+    password: ***********
+
+  # JPA Configuration
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
+    hibernate:
+      ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
+    properties:
+      hibernate:
+#        dialect: org.hibernate.dialectMariaDB106Dialect
+        format_sql: true
+    show-sql: true # to see sql commands
+
+  # SQL Initialisation
+  sql:
+    init:
+      mode: never # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
+      platform: mysql # specify the suffix of schema-{platform}.sql and data-{plateform}.sql files
