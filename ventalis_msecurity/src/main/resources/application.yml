@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_logindb
-    username: ***********
-    password: ***********
+    url: jdbc:mariadb://**{yourDatabaseUrl}**/ventalis-jp_logindb
+    username: ************
+    password: ************
 
   # JPA Configuration
   jpa:
@@ -18,9 +18,8 @@ spring:
       ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
-#        dialect: org.hibernate.dialectMariaDB106Dialect
         format_sql: true
-    show-sql: true # to see sql commands
+      show-sql: true # to see sql commands
 
   # SQL Initialisation
   sql:

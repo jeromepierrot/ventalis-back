@@ -6,16 +6,16 @@ server:
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://mysql-ventalis-jp.alwaysdata.net/ventalis-jp_productsdb
-    username: ***********
-    password: ***********
+    url: jdbc:mariadb://**{database-url}**/ventalis-jp_productsdb
+    username: ************
+    password: ************
 
 # JPA Configuration
   jpa:
     database-platform: org.hibernate.dialect
     database: mysql
     hibernate:
-      ddl-auto: validate # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
+      ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MariaDB106Dialect

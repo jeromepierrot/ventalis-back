@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jpierrot</groupId>
-	<artifactId>ventalismsecurity</artifactId>
+	<artifactId>msecurity</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>ventalismsecurity</name>
+	<name>ventalis_msecurity</name>
 	<description>Ventalis microservice for authentication (security)</description>
 	<properties>
 		<java.version>17</java.version>

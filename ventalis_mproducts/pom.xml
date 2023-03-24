@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.jpierrot</groupId>
-	<artifactId>ventalis-mproducts</artifactId>
+	<artifactId>ventalis_mproducts</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>ventalis-mproducts</name>

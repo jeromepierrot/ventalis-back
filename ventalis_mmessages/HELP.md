@@ -1,6 +1,6 @@
 # Original references
 The following was discovered as part of building this project from Spring Boot Initializr : https://start.spring.io/
-For more info about this project, please [see README.md file](./README.md). 
+For more info about this project, please [see README.md file](./README.md).
 
 # Getting Started
 
