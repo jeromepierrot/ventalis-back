@@ -85,9 +85,9 @@ If running IntelliJ Idea :
 5. double-click on "compile"
    (note : keep in mind the 'compile' button, it may be useful  later on)
 
-![maven-generate-update_intelliJ.png](ventalis_msecurity%2Freadme%2Fmaven-generate-update_intelliJ.png)
+![maven-generate-update_intelliJ.png](readme%2Fmaven-generate-update_intelliJ.png)
 
-![maven-clean_intelliJ.png](ventalis_msecurity%2Freadme%2Fmaven-clean_intelliJ.png)
+![maven-clean_intelliJ.png](readme%2Fmaven-clean_intelliJ.png)
 
 or,
 
