@@ -15,13 +15,13 @@ The website (front-end) part of the project is stored in another Git repositorie
 https://github.com/jeromepierrot/ventalis-front
 
 Two others applications will be available soon :
-- one Mobile Android application for registered clients only = Android application (based on Kotlin + JetPack Compose). iOS should be design ed to ()
+- one Mobile Android application for registered clients only = Android application (based on Kotlin + JetPack Compose). iOS should be designed too.
 
-(link will be available soon to download the apk installer from FTP server)
+        (link will be available soon to download the apk installer from FTP server)
 
 - one Desktop application for registered Employees : will be based on a PWA made with Angular CLI + Angular Material. It will run on any desktop OS but Windows and Mac OS are the main target OS.
 
-(link will be available soon to download the app installer from FTP server)
+        (link will be available soon to download the app installer from FTP server)
 
 Both applications will need an available account to work with.
 
@@ -46,12 +46,12 @@ Each module is mainly based on :
 - JAVA SE 17*
 - Spring Boot Starter Web 3.0.4 (incl RESTful API + Tomcat server) 
 - Spring Security 6.0.x
-- Spring Data JPA (incl. JDBC + Hibernate ORM) + MariaDB drivers (10.6)
+- Spring Data JPA (incl. Hibernate ORM) + MariaDB drivers (10.6)
 - Spring Validation (Hibernate Validator)
 
 About the additional development tools :
 - DevTools
-- Lombok (included with)
+- Lombok
 
 _*(note : version 17 is required for Spring Boot 3.0.x)_
 
@@ -68,7 +68,7 @@ For more convenient, it is recommended to load the full project using **IntelliJ
 To run this micro-service on a development environment and as standalone application, you need :
 
 - Java JDK version 17* installed on your machine (OpenJDK or others : see https://adoptium.net/ for pre-built OpenJDK LTS release)
-- Maven 4.0.0 project management tool
+- Maven project management tool (see : https://maven.apache.org/install.html if you do not use IntelliJ IDE)
 - recommended IDE : IntelliJ Idea (VS Code, Eclipse or STS can be used but not tested)
 - MariaDB's SQL Database is required (local or server hosted).
 
@@ -196,6 +196,5 @@ While User accounts (for clients) are directly created on the website itself.
 All those 3 types of account can log in the website, then will have access to a special dedicated space.
 
     This section is not fully edited yet. Please come back later for any update
-
-### Reference Documentation and Guide
-[See HELP.md file](./HELP.md)
+    
+That's all folks !
