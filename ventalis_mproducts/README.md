@@ -2,7 +2,7 @@
 This project is part of Ventalis project (back-end microservice).
 This microservice is not supposed to work alone and should be running alongside other micro-services.
 
-For the time being, only 'mproducts' (this one) and 'msecurity' micro-services are available.
+      For the time being, only 'mproducts' (this one) and 'msecurity' micro-services are available.
 
 The website (front-end) part of the project is stored in another Git repositories :
 https://github.com/jeromepierrot/ventalis-front
@@ -33,9 +33,9 @@ If running IntelliJ Idea :
 5. double-click on "compile"
    (note : keep in mind the 'compile' button, it may be useful  later on)
 
-![maven-generate-update_intelliJ.png](readme%2Fmaven-generate-update_intelliJ.png)
+![maven-generate-update_intelliJ.png](..%2Freadme%2Fmaven-generate-update_intelliJ.png)
 
-![maven-clean_intelliJ.png](readme%2Fmaven-clean_intelliJ.png)
+![maven-clean_intelliJ.png](..%2Freadme%2Fmaven-clean_intelliJ.png)
 
 or,
 
@@ -56,7 +56,7 @@ From IntelliJ Idea :
 2. (in some cases, if you've got strange not 'in-phase' code, or changes that don't seem to apply, you'll certainly need to re-compile the project manually, remember point 5. above in Maven section).
 3. then choose 'run' (or 'debug', or 'coverage' as you wish)
 
-![maven-run_intelliJ.png](readme%2Fmaven-run_intelliJ.png)
+![maven-run_intelliJ.png](..%2Freadme%2Fmaven-run_intelliJ.png)
 
 From CLI (or VS Code), enter the command below :
 `mvn spring-boot:run`
@@ -92,4 +92,4 @@ Then adapt the queries according to the chosen DBMS. In this particular case set
       This section is not fully edited yet. Please come back later for any update
 
 ### Original Reference Documentation and Guide
-[See HELP.md file](./HELP.md)
+[See HELP.md file](.%2FHELP.md)

@@ -24,7 +24,7 @@ https://github.com/jeromepierrot/ventalis-front
 # Getting Started
 To run this module on a development environment and as standalone application.
 
-      This section is not fully edited yet. Please come back later for any update
+    This section is not fully edited yet. Please come back later for any update
 
 # Functional details
 

@@ -5,8 +5,9 @@
 This project is the back-end part of Ventalis project.
 Based on microservice architecture, the back-end is composed with multi-Java/Spring "mini-projects" (that is called "module" below).
 
-For the time being, each module is a simple RESTful API with its own database.
-Each Front-end service (Website, Desktop app and Mobile app) can directly access to them one by one using different URLs.
+    For the time being, each module is a simple RESTful API with its own database. Except 'mmail' which will be simple mail server (REST API + SMTP server).
+    Each Front-end service (Website, Desktop app and Mobile app) can directly access to them one by one using different URLs.
+    Also note that only 'mproducts' and 'msecurity' services are available.
 
 But later, it will be completed by some additional full micro-service architecture parts (ie: gateway based on Feign REST API, Gateway, Configurer, reverse-proxy servers, etc...) so that only one API (one URL) will "serve" the different front-end's requests.
 
@@ -84,9 +85,9 @@ If running IntelliJ Idea :
 5. double-click on "compile"
    (note : keep in mind the 'compile' button, it may be useful  later on)
 
-![maven-generate-update_intelliJ.png](readme%2Fmaven-generate-update_intelliJ.png)
+![maven-generate-update_intelliJ.png](ventalis_msecurity%2Freadme%2Fmaven-generate-update_intelliJ.png)
 
-![maven-clean_intelliJ.png](readme%2Fmaven-clean_intelliJ.png)
+![maven-clean_intelliJ.png](ventalis_msecurity%2Freadme%2Fmaven-clean_intelliJ.png)
 
 or,
 
