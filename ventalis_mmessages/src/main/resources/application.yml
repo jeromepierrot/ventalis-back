@@ -1,28 +1,27 @@
-# MariaDB configuration for micro-products
+# MariaDB configuration for micro-messages
 server:
-  port: 9081
+  port: 9083
 
 # JDBC Configuration
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://**{database-url}**/ventalis-jp_productsdb
+    url: jdbc:mariadb://**{yourDatabaseUrl}**/ventalis-jp_messagingdb
     username: ************
     password: ************
 
 # JPA Configuration
   jpa:
-    database-platform: org.hibernate.dialect
     database: mysql
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
     hibernate:
       ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MariaDB106Dialect
-    show-sql: true # to see sql commands
+        show-sql: true # to see sql commands
 
 # SQL Initialisation
   sql:
     init:
-      mode: never # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
+      mode: always # never ##for production##, embedded, always ##DNU: for the FIRST init ONLY##
       platform: mysql # specify the suffix of schema-{platform}.sql and data-{plateform}.sql files

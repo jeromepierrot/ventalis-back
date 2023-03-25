@@ -1,25 +1,24 @@
-# MariaDB configuration for micro-products
+# MariaDB configuration for micro-orders
 server:
-  port: 9081
+  port: 9082
 
 # JDBC Configuration
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://**{database-url}**/ventalis-jp_productsdb
+    url: jdbc:mariadb://**{yourDatabaseUrl}**/ventalis-jp_ordersdb
     username: ************
     password: ************
 
 # JPA Configuration
   jpa:
-    database-platform: org.hibernate.dialect
     database: mysql
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
     hibernate:
       ddl-auto: update # other options : none, validate ##for production##, update, create-drop ##DNU: for the FIRST init ONLY##
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MariaDB106Dialect
-    show-sql: true # to see sql commands
+        show-sql: true # to see sql commands
 
 # SQL Initialisation
   sql:

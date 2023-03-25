@@ -16,6 +16,7 @@ target/
 .idea
 .idea/sonarlint
 .idea/sonarlint/*
+.idea/sonarlint/**
 *.iws
 *.iml
 *.ipr

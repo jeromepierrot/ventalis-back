@@ -17,7 +17,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String name; // TODO : Should be unique (-> this constraint is done in MariaDB's side)
 
     @Builder.Default
     private Boolean isVisible = false;
